@@ -25,7 +25,7 @@ int main() {
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // *required* on mac 
     #endif
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Mac GL 3.3", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
     glfwMakeContextCurrent(window);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -68,8 +68,8 @@ int main() {
 	
 	// holds the file paths
 	std::array<TextureFile::TextureLocation, 2> textures = {{
-		{"/Users/tejassrinivasan/Documents/Metal_Projects/OpenGLOnMac/LearnOpenGL/LearnOpenGL/Texture/container.jpg", TextureFile::FileFormat::JPG, GL_CLAMP_TO_EDGE},
-		{"/Users/tejassrinivasan/Documents/Metal_Projects/OpenGLOnMac/LearnOpenGL/LearnOpenGL/Texture/awesomeface.png", TextureFile::FileFormat::PNG, GL_REPEAT}
+		{"Texture/container.jpg", TextureFile::FileFormat::JPG, GL_CLAMP_TO_EDGE},
+		{"Texture/awesomeface.png", TextureFile::FileFormat::PNG, GL_REPEAT}
 	}};
 	// holds the textureIDs
 	std::array<GLuint, 2> texIDs = {};
@@ -84,8 +84,8 @@ int main() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	
 	// Shader
-	Shader myShader("/Users/tejassrinivasan/Documents/Metal_Projects/OpenGLOnMac/LearnOpenGL/LearnOpenGL/Shader/Basic.vsh",
-					"/Users/tejassrinivasan/Documents/Metal_Projects/OpenGLOnMac/LearnOpenGL/LearnOpenGL/Shader/Basic.fsh");
+	Shader myShader("Shader/Basic.vsh",
+					"Shader/Basic.fsh");
 	//transformation matrix
 
     while (!glfwWindowShouldClose(window)) {
@@ -106,11 +106,7 @@ int main() {
 		myShader.setInt("texture1", 1);
 		// we set the transform matrix
 		glm::mat4 trans = glm::mat4(1.0f);
-		//trans = glm::rotate(trans, (float) glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-		//trans = glm::translate(trans, glm::vec3(0.5f, 0.5f, 0.0f));
-		//myShader.setMat4("transform", true, glm::mat4(1.0f));
 		serpinskiTriangle(myShader, trans, 8);
-		//glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 
 		
         glfwSwapBuffers(window);
