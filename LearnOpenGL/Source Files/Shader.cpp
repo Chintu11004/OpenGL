@@ -11,8 +11,8 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath){
     // we now try to read the data of the shader files at a given file path
     try {
         vShaderFile.open(vertexPath);
-        fShaderFile.open(fragmentPath);
-        std::stringstream vShaderStream, fShaderStream;
+		fShaderFile.open(fragmentPath);
+		std::stringstream vShaderStream, fShaderStream;
         
         vShaderStream << vShaderFile.rdbuf();
         fShaderStream << fShaderFile.rdbuf();
@@ -56,7 +56,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath){
     
     ID = glCreateProgram();
 	glAttachShader(ID, vertex);
-    glAttachShader(ID, fragment);
+	glAttachShader(ID, fragment);
     glLinkProgram(ID);
 	
     glGetProgramiv(ID, GL_LINK_STATUS, &success);
@@ -91,6 +91,10 @@ void Shader::setVec4(const std::string &name, GLfloat value1, GLfloat value2, GL
 
 void Shader::setVec3(const std::string &name, GLfloat value1, GLfloat value2, GLfloat value3) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), value1, value2, value3);
+}
+
+void Shader::setVec3(const std::string &name, glm::vec3 colorVector) const {
+	glUniform3f(glGetUniformLocation(ID, name.c_str()), colorVector.x, colorVector.y, colorVector.z);
 }
 
 void Shader::setMat4(const std::string &name, bool colMajorTrue, glm::mat4 trans) const {

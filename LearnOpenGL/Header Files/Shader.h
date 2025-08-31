@@ -31,6 +31,7 @@ public:
     void setVec4(const std::string &name, GLfloat value1, GLfloat value2, GLfloat value3, GLfloat value4) const;
     // set a uniform vec3 value
     void setVec3(const std::string &name, GLfloat value1, GLfloat value2, GLfloat value3) const;
+	void setVec3(const std::string &name, glm::vec3 colorVector) const;
 	// set a uniform mat4 value
 	void setMat4(const std::string &name, bool colMajorTrue, glm::mat4 trans) const;
 };
